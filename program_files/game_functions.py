@@ -274,6 +274,6 @@ def check_high_score(stats, sb):
 
 
 def save_score(score):
-	with open('all_time_score.json', 'w') as file:
+	with open('../data_files/all_time_score.json', 'w') as file:
 		json.dump(score, file)
 

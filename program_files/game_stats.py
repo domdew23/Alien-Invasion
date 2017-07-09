@@ -24,7 +24,7 @@ class GameStats():
 
 	def get_high_score(self):
 		try:
-			with open('all_time_score.json') as file:
+			with open('../data_files/all_time_score.json') as file:
 				self.high_score = json.load(file)
 		except FileNotFoundError:
 			self.high_score = 0
