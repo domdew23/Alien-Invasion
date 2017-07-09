@@ -1,3 +1,4 @@
+![](/images/ship_big.bmp?raw=True "Alien Invasion")
 # Alien Invasion
 
 In Alien Invasion, the player controls a shit that appears at the bottom center of the screen. The player can move the ship right and left using the arrow keysand 
@@ -17,13 +18,13 @@ To run this game you must have Python 3.x installed and pygame installed. [Click
 
 Run the command: 'sudo apt-get install python-pygame' in the terminal
 
-### - Installing Pygame on OS X
+#### - Installing Pygame on OS X
 
 Type the following commands in terminal:
 * brew install hg sdl sdl_image sdl_ttf
 * pip3 install --user hg+http://bitbucket.org/pygame/pygame
 
-### - Installing Pygame on Windows
+#### - Installing Pygame on Windows
 
 [Click Here to install Pygame for Windows](https://bitbucket.org/pygame/pygame/downloads/). Then choose the version of python you are running. You can check this by typing 'python -m pip --version'.
 
