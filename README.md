@@ -9,11 +9,11 @@ To play Alien Invasion download the repository and navigate to the 'program_file
 
 ### Prerequisites
 
-To run this game you must have Python 3.x installed and pygame installed. [Click Here to install Python](https://www.python.org/ftp/python/3.6.1/python-3.6.1.exe).
+To run this game you must have Python 3.x installed and pygame installed. [Click Here to download Python](https://www.python.org).
 
 #### - Installing Pygame on Linux 
 
-Run the command: 'sudo apt-get install python-pygame' in the terminal
+* $ sudo apt-get install python-pygame
 
 #### - Installing Pygame on OS X
 
@@ -23,7 +23,6 @@ Run the command: 'sudo apt-get install python-pygame' in the terminal
 * $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 * $ brew doctor
 
-Type the following commands in terminal:
 * $ brew install hg sdl sdl_image sdl_ttf
 * $ pip3 install --user hg+http://bitbucket.org/pygame/pygame
 
