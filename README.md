@@ -1,4 +1,4 @@
-![](/images/logo?raw=True "Alien Invasion")
+![](/images/logo.jpg?raw=True "Alien Invasion")
 # Alien Invasion
 
 In Alien Invasion, the player controls a shit that appears at the bottom center of the screen. The player can move the ship right and left using the arrow keysand 
