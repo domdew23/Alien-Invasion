@@ -15,7 +15,7 @@ class Alien(Sprite):
 		self.settings = settings
 
 		possible_images = []
-		path = '../images/'
+		path = '../images/game_images/'
 		for x in range(1,5):
 			possible_images.append(path + 'alien' + str(x) + '.bmp')
 

@@ -17,9 +17,9 @@ class Ship(Sprite):
 
 		# Load the ship image and get its rect.
 		if big:
-			self.image = pygame.image.load('../images/ship_big.bmp')
+			self.image = pygame.image.load('../images/game_images/ship_big.bmp')
 		else:
-			self.image = pygame.image.load('../images/ship_small.bmp')
+			self.image = pygame.image.load('../images/game_images/ship_small.bmp')
 
 		self.rect = self.image.get_rect()
 		self.screen_rect = screen.get_rect()
