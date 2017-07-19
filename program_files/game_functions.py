@@ -28,7 +28,6 @@ import string
 from bullets import Bullet
 from alien import Alien
 from time import sleep
-from start_menu import StartMenu
 from pygame.locals import *
 
 def respond_keydown(event, settings, screen, ship, bullets):
@@ -336,7 +335,7 @@ def get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button
 		elif inkey == 4422:
 			mouse_x, mouse_y = pygame.mouse.get_pos()
 			respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y)
-			return 'guest1'
+			return 'Guest1'
 		elif inkey <= 127:
 		  current_string.append(chr(inkey))
 
