@@ -2,7 +2,7 @@ import pygame
 
 class Button():
 
-	def __init__(self, settings, screen, msg):
+	def __init__(self, settings, screen, msg, adj_x=0, adj_y=0):
 		# Initialize button attributes
 		self.screen = screen
 		self.screen_rect = screen.get_rect()
@@ -10,8 +10,8 @@ class Button():
 		
 		# Build the button's rect object and center it
 		self.rect = pygame.Rect(0, 0, self.settings.button_width, self.settings.button_height)
-		self.rect.center = self.screen_rect.center
-		self.rect.centery = self.screen_rect.centery + 60
+		self.rect.centerx = self.screen_rect.centerx + adj_x
+		self.rect.centery = self.screen_rect.centery + adj_y
 
 		# The button message needs to be prepped only once
 		self.prep_msg(msg)
