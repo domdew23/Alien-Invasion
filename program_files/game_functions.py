@@ -19,15 +19,17 @@
 -check_aliens_bottom() check and respond to aliens reaching the bottom of the screen
 -check_high_score() check and respond to new high scores
 '''
-
 import sys
 import pygame
 import json
+import colors
+import string
 
 from bullets import Bullet
 from alien import Alien
 from time import sleep
 from start_menu import StartMenu
+from pygame.locals import *
 
 def respond_keydown(event, settings, screen, ship, bullets):
 	# Respond to keydown events
@@ -80,6 +82,7 @@ def respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play
 		create_fleet(settings, screen, ship, aliens)
 		ship.center_ship()
 
+		update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button)
 
 def fire_bullet(settings, screen, ship, bullets):
 	# Fire a bullet if limit is not reached yet
@@ -159,10 +162,9 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 		# Draw the scoreboard
 		sb.show_score()
 	else:
-		start_menu = StartMenu(screen)
 		# Draw the play button if the game is inactive
 		play_button.draw()
-		username = start_menu.ask("Username: ")
+		username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
 		if username != None:
 			stats.game_active = True
 
@@ -283,3 +285,60 @@ def save_score(score):
 	with open('../data_files/all_time_score.json', 'w') as file:
 		json.dump(score, file)
 
+
+def get_input_key(settings, stats, screen, sb, ship, aliens, bullets, play_button):
+	while True:
+		event = pygame.event.poll()
+		if event.type == KEYDOWN:
+			if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+				sys.exit()
+			else:
+				return event.key
+		elif event.type == pygame.QUIT:
+			sys.exit()
+		elif event.type == MOUSEBUTTONDOWN:
+			# guest
+			return 4422
+		else:
+			pass
+
+
+def display_box(settings, stats, screen, sb, ship, aliens, bullets, play_button, message):
+	# Print a message in a box in the middle of the screen 
+	box_width, box_height = 320, 50
+	box_x, box_y = (screen.get_width() / 2) - 158, (screen.get_height() / 2) - 50
+	fontobject = pygame.font.Font(None,18)
+
+	# Black background
+	pygame.draw.rect(screen, colors.black, (box_x, box_y, box_width, box_height))
+	# White border
+	pygame.draw.rect(screen, colors.white, (box_x - 2, box_y - 2, box_width + 4, box_height + 4), 1)
+
+	if len(message) != 0:
+		screen.blit(fontobject.render(message, 1, colors.white), (box_x, box_y))
+	pygame.display.flip()
+	#update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button)
+
+def get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, message):
+	# ask(screen, question) -> answer
+	pygame.font.init()
+	current_string = []
+	string = ""
+	display_box(settings, stats, screen, sb, ship, aliens, bullets, play_button, message + string.join(current_string))
+	while True:
+		inkey = get_input_key(settings, stats, screen, sb, ship, aliens, bullets, play_button)
+		if inkey == K_BACKSPACE:
+		  current_string = current_string[0:-1]
+		elif inkey == K_RETURN:
+		  break
+		elif inkey == K_MINUS:
+		  current_string.append("_")
+		elif inkey == 4422:
+			mouse_x, mouse_y = pygame.mouse.get_pos()
+			respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y)
+			return 'guest1'
+		elif inkey <= 127:
+		  current_string.append(chr(inkey))
+
+		display_box(settings, stats, screen, sb, ship, aliens, bullets, play_button, message + string.join(current_string))
+	return string.join(current_string)
