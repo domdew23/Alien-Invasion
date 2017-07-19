@@ -27,6 +27,7 @@ import json
 from bullets import Bullet
 from alien import Alien
 from time import sleep
+from start_menu import StartMenu
 
 def respond_keydown(event, settings, screen, ship, bullets):
 	# Respond to keydown events
@@ -55,6 +56,7 @@ def respond_keyup(event, ship):
 def respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y):
 	# Start a new game when the player clicks play
 	button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+
 	if button_clicked and not stats.game_active:
 		# Hide the mouse curser
 		pygame.mouse.set_visible(False)
@@ -143,22 +145,26 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 	# Redraw the screen during each pass through the loop
 	screen.fill(settings.bg_color)
 
-	# Redraw bullets behind ship and aliens
-	for bullet in bullets.sprites():
-		bullet.draw()
+	if stats.game_active:
+		# Redraw bullets behind ship and aliens
+		for bullet in bullets.sprites():
+			bullet.draw()
 
-	# Draw ship to the screen
-	ship.blitme()
+		# Draw ship to the screen
+		ship.blitme()
 
-	# Draw aliens to the screen
-	aliens.draw(screen)
+		# Draw aliens to the screen
+		aliens.draw(screen)
 
-	# Draw the scoreboard
-	sb.show_score()
-
-	# Draw the play button if the game is inactive
-	if not stats.game_active:
+		# Draw the scoreboard
+		sb.show_score()
+	else:
+		start_menu = StartMenu(screen)
+		# Draw the play button if the game is inactive
 		play_button.draw()
+		username = start_menu.ask("Username: ")
+		if username != None:
+			stats.game_active = True
 
 	# Make the most recently drawn screen visible
 	pygame.display.flip()

@@ -1,4 +1,6 @@
 import pygame, pygame.font, pygame.event, pygame.draw, string
+import sys
+
 from pygame.locals import *
 
 
@@ -8,27 +10,36 @@ class StartMenu():
 	def __init__(self, screen):
 		self.screen = screen
 		self.screen_rect = screen.get_rect()
+		self.box_width, self.box_height = 320, 50
+		self.box_x, self.box_y = (self.screen.get_width() / 2) - 158, (self.screen.get_height() / 2) - 50
 
 		# Font settings
 		self.text_color = (30, 30, 30)
 		self.font = pygame.font.SysFont(None, 48)
 
 	def get_key(self):
-	  while 1:
-	    event = pygame.event.poll()
-	    if event.type == KEYDOWN:
-	      return event.key
-	    else:
-	      pass
+		while 1:
+			event = pygame.event.poll()
+			if event.type == KEYDOWN:
+				if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+					sys.exit()
+				else:
+					return event.key
+			elif event.type == pygame.QUIT:
+				sys.exit()
+			else:
+				pass
 
 	def display_box(self, message):
 	  # Print a message in a box in the middle of the screen 
 	  fontobject = pygame.font.Font(None,18)
-	  pygame.draw.rect(self.screen, (0,0,0),((self.screen.get_width() / 2) - 100, (self.screen.get_height() / 2) - 10, 200,20), 0)
-	  pygame.draw.rect(self.screen, (255,255,255),((self.screen.get_width() / 2) - 102, (self.screen.get_height() / 2) - 12, 204,24), 1)
+	  # Black background
+	  pygame.draw.rect(self.screen, (0,0,0), (self.box_x, self.box_y, self.box_width, self.box_height))
+	  # White border
+	  pygame.draw.rect(self.screen, (255,255,255), (self.box_x - 2, self.box_y - 2, self.box_width + 4, self.box_height + 4), 1)
 
 	  if len(message) != 0:
-	    self.screen.blit(fontobject.render(message, 1, (255,255,255)), ((self.screen.get_width() / 2) - 100, (self.screen.get_height() / 2) - 10))
+	    self.screen.blit(fontobject.render(message, 1, (255,255,255)), (self.box_x, self.box_y))
 	  pygame.display.flip()
 
 	def ask(self, question):
