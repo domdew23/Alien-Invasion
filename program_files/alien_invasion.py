@@ -8,6 +8,7 @@
 '''
 import pygame
 import game_functions as gf
+import sys
 
 from settings import Settings
 from ship import Ship
@@ -16,6 +17,7 @@ from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
 from  pygame.sprite import Group
+from start_menu import StartMenu
 
 def run_game():
 	# Initialize pygame, settings and create a screen object 
@@ -31,6 +33,12 @@ def run_game():
 	# Create a instance to store game stats and create a scoreboard
 	stats = GameStats(settings)
 	sb = Scoreboard(settings, screen, stats)
+
+	while not stats.game_active:
+		start_menu = StartMenu(screen)
+		username = start_menu.ask("Username: ")
+		if username != None:
+			break
 
 	# Create a ship, alien, and groups to store bullets and alien fleet
 	ship = Ship(screen, settings)
@@ -52,3 +60,6 @@ def run_game():
 		gf.update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button)
 		
 run_game()
+
+
+
