@@ -3,7 +3,7 @@
 -Settings class contains only the __init__() method whihc initializes attributes controlling games apparance and ship's speed
 '''
 import pygame
-
+import colors
 class Settings():
 	# Class to store all settings for Alien Invasion
 
@@ -11,7 +11,7 @@ class Settings():
 		# Initialize game's static settings
 		self.screen_x = 1310
 		self.screen_y = 800
-		self.bg_color = (230, 230, 230)
+		self.bg_color = colors.light_gray
 
 		# Ship settings
 		self.ship_limit = 3
@@ -33,8 +33,8 @@ class Settings():
 
 		# Play button settings
 		self.button_width, self.button_height = 320, 50
-		self.button_color = (0, 255, 0)
-		self.button_text_color = (255, 255, 255)
+		self.button_color = colors.lime
+		self.button_text_color = colors.white
 		self.button_font = pygame.font.SysFont(None, 48)
 
 		self.initialize_dynamic_settings()

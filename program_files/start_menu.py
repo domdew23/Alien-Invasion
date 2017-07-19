@@ -1,5 +1,6 @@
 import pygame, pygame.font, pygame.event, pygame.draw, string
 import sys
+import colors
 
 from pygame.locals import *
 
@@ -34,12 +35,12 @@ class StartMenu():
 	  # Print a message in a box in the middle of the screen 
 	  fontobject = pygame.font.Font(None,18)
 	  # Black background
-	  pygame.draw.rect(self.screen, (0,0,0), (self.box_x, self.box_y, self.box_width, self.box_height))
+	  pygame.draw.rect(self.screen, colors.black, (self.box_x, self.box_y, self.box_width, self.box_height))
 	  # White border
-	  pygame.draw.rect(self.screen, (255,255,255), (self.box_x - 2, self.box_y - 2, self.box_width + 4, self.box_height + 4), 1)
+	  pygame.draw.rect(self.screen, colors.white, (self.box_x - 2, self.box_y - 2, self.box_width + 4, self.box_height + 4), 1)
 
 	  if len(message) != 0:
-	    self.screen.blit(fontobject.render(message, 1, (255,255,255)), (self.box_x, self.box_y))
+	    self.screen.blit(fontobject.render(message, 1, colors.white), (self.box_x, self.box_y))
 	  pygame.display.flip()
 
 	def ask(self, question):
