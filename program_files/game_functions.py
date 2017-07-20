@@ -82,8 +82,9 @@ def respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play
 		# Create a new fleet and center the ship
 		create_fleet(settings, screen, ship, aliens)
 		ship.center_ship()
-
+		
 		update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button)
+		return True
 
 def fire_bullet(settings, screen, ship, bullets):
 	# Fire a bullet if limit is not reached yet
@@ -145,8 +146,8 @@ def check_events(settings, stats, screen, sb, ship, aliens, bullets, play_button
 			respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y)
 
 
-def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button, show_txt=False):
-	if show_txt:
+def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button, playing=False):
+	if playing:
 		# Redraw the screen during each pass through the loop
 		screen.fill(settings.bg_color)
 		if stats.game_active:
@@ -166,10 +167,13 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 			# Draw the play button if the game is inactive
 			play_button.draw()
 			username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
-			if username != None:
+			print(username)
+			while username == '':
+				no_username(settings, screen, play_button, "Please enter a username or click play as guest")
+				username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
+			else:
 				stats.game_active = True
-
-		# Make the most recently drawn screen visible
+	# Make the most recently drawn screen visible
 	pygame.display.flip()
 
 
@@ -326,27 +330,28 @@ def get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button
 	current_string = []
 	string = ""
 	display_box(settings, stats, screen, sb, ship, aliens, bullets, play_button, message + string.join(current_string))
+
 	while True:
 		inkey = get_input_key(settings, stats, screen, sb, ship, aliens, bullets, play_button)
 		if inkey == K_BACKSPACE:
 		  current_string = current_string[0:-1]
 		elif inkey == K_RETURN:
-			if not current_string:
-				print("Please enter your username or play as guest")
 			break
 		elif inkey == K_MINUS:
 		  current_string.append("_")
 		elif inkey == 4422 and not current_string:
 			mouse_x, mouse_y = pygame.mouse.get_pos()
-			respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y)
-			return 'Guest1'
+			if respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y):
+				return 'Guest1'
+			else:
+				return ''
 		elif inkey <= 127:
 		  current_string.append(chr(inkey))
-		
 		if current_string:
 			show_button(settings, screen)
 		else:
 			del_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, message)
+
 		display_box(settings, stats, screen, sb, ship, aliens, bullets, play_button, message + string.join(current_string))
 	return string.join(current_string)
 
@@ -361,6 +366,14 @@ def del_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, 
 	display_box(settings, stats, screen, sb, ship, aliens, bullets, play_button, message)
 
 
+def no_username(settings, screen, play_button, message):
+	text_color = (30, 30, 30)
+	font = pygame.font.SysFont(None, 48)
+	text_image = font.render(message, True, text_color, settings.bg_color)
 
-
+	text_rect = text_image.get_rect()
+	play_button_rect = play_button.get_rect()
+	text_rect.centerx = play_button_rect.centerx
+	text_rect.top = play_button_rect.top - 150
+	screen.blit(text_image, text_rect)
 
