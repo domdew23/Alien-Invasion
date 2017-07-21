@@ -295,7 +295,7 @@ def get_input_key(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 	while True:
 		event = pygame.event.poll()
 		if event.type == KEYDOWN:
-			if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+			if event.key == pygame.K_ESCAPE:
 				sys.exit()
 			else:
 				return event.key
@@ -344,7 +344,7 @@ def get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button
 			if respond_play_button(settings, stats, screen, sb, ship, aliens, bullets, play_button, mouse_x, mouse_y):
 				return 'Guest1'
 			else:
-				return ''
+				break
 		elif inkey <= 127:
 		  current_string.append(chr(inkey))
 		if current_string:
