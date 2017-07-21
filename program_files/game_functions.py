@@ -166,17 +166,19 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 		else:
 			# Draw the play button if the game is inactive
 			play_button.draw()
-			username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
-			print(username)
-			if check_user(username):
-				get_user(username)
-			else:
-				save_user(username, stats.data)
-			while username == '':
+			stats.user = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
+			while stats.user == '':
 				no_username(settings, screen, play_button, "Please enter a username or click play as guest")
-				username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
+				stats.user = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
+			print(stats.user)
+			
+			if check_user(stats.user):
+				get_user(stats.user)
 			else:
-				stats.game_active = True
+				save_user(stats.user, stats.data)
+
+	
+			stats.game_active = True
 	# Make the most recently drawn screen visible
 	pygame.display.flip()
 
@@ -228,6 +230,8 @@ def ship_hit(settings, stats, screen, sb, ship, aliens, bullets):
 	else:
 		stats.game_active = False
 		pygame.mouse.set_visible(True)
+		print(str(stats.score))
+		save_score(stats.score, stats.user)
 		print("GAME OVER")
 
 
@@ -290,9 +294,21 @@ def check_high_score(stats, sb):
 		save_score(stats.score)
 
 
-def save_score(score):
-	with open('../data_files/all_time_score.json') as file:
-		json.dump(score, file)
+def save_score(score, user):
+	with open('../data_files/test.json') as file:
+		data = json.load(file)
+		for saved_user in data['users']:
+			if saved_user['username'] == user:
+				saved_user['scores'].append(score)
+
+	save(data)
+
+
+def find_user(user, data):
+	for saved_user in data['users']:
+		if saved_user['username'] == user:
+			return saved_user['username']
+	return ''
 
 
 def check_user(user):
@@ -311,9 +327,14 @@ def save_user(user, data):
 	with open('../data_files/test.json', 'r+') as file:
 		data = json.load(file)
 		data['users'].append({
-			'username': user
+			'username': user,
+			'scores': []
 		})
 
+	save(data)
+
+
+def save(data):
 	with open('../data_files/test.json', 'w') as file:
 		json.dump(data, file, indent=4)
 
