@@ -168,6 +168,10 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 			play_button.draw()
 			username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
 			print(username)
+			if check_user(username):
+				get_user(username)
+			else:
+				save_user(username, stats.data)
 			while username == '':
 				no_username(settings, screen, play_button, "Please enter a username or click play as guest")
 				username = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
@@ -287,9 +291,36 @@ def check_high_score(stats, sb):
 
 
 def save_score(score):
-	with open('../data_files/all_time_score.json', 'w') as file:
+	with open('../data_files/all_time_score.json') as file:
 		json.dump(score, file)
 
+
+def check_user(user):
+	try:
+		with open('../data_files/test.json') as file:
+			data = json.load(file)
+			for saved_user in data['users']:
+				if saved_user['username'] == user:
+					return True
+			return False
+	except FileNotFoundError:
+		return False
+
+def save_user(user, data):
+	data = {}
+	with open('../data_files/test.json', 'r+') as file:
+		data = json.load(file)
+		data['users'].append({
+			'username': user
+		})
+
+	with open('../data_files/test.json', 'w') as file:
+		json.dump(data, file, indent=4)
+
+
+def get_user(user):
+	print('getting user')
+	pass
 
 def get_input_key(settings, stats, screen, sb, ship, aliens, bullets, play_button):
 	while True:
