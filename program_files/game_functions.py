@@ -230,8 +230,9 @@ def ship_hit(settings, stats, screen, sb, ship, aliens, bullets):
 	else:
 		stats.game_active = False
 		pygame.mouse.set_visible(True)
-		print(str(stats.score))
 		save_score(stats.score, stats.user)
+		all_time_scores(stats)
+		print(str(stats.all_time_scores))
 		print("GAME OVER")
 
 
@@ -426,4 +427,13 @@ def no_username(settings, screen, play_button, message):
 	text_rect.centerx = play_button_rect.centerx
 	text_rect.top = play_button_rect.top - 150
 	screen.blit(text_image, text_rect)
+
+
+def all_time_scores(stats):
+	with open('../data_files/test.json') as file:
+		data = json.load(file)
+		for user in data['users']:
+			for score in user['scores']:
+				stats.all_time_scores.append(score)
+	stats.all_time_scores.sort(reverse=True)
 

@@ -22,3 +22,7 @@ for u in data['users']:
 	print(u['username'] + ' score = ' + str(u['scores']))
 
 print(data['users'])
+
+alist = [2, 32, 323, 1, 3]
+alist.sort(reverse=True)
+print(str(alist))
