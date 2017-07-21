@@ -171,7 +171,7 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
 				no_username(settings, screen, play_button, "Please enter a username or click play as guest")
 				stats.user = get_username(settings, stats, screen, sb, ship, aliens, bullets, play_button, "Username: ")
 			print(stats.user)
-			
+
 			if check_user(stats.user):
 				get_user(stats.user)
 			else:
@@ -297,28 +297,26 @@ def check_high_score(stats, sb):
 def save_score(score, user):
 	with open('../data_files/test.json') as file:
 		data = json.load(file)
-		for saved_user in data['users']:
-			if saved_user['username'] == user:
-				saved_user['scores'].append(score)
-
+		saved_user = find_user(user, data)
+		saved_user['scores'].append(score)
 	save(data)
 
 
 def find_user(user, data):
 	for saved_user in data['users']:
 		if saved_user['username'] == user:
-			return saved_user['username']
-	return ''
+			return saved_user
+	return None
 
 
 def check_user(user):
 	try:
 		with open('../data_files/test.json') as file:
 			data = json.load(file)
-			for saved_user in data['users']:
-				if saved_user['username'] == user:
-					return True
-			return False
+			if find_user(user, data) != None:
+				return True
+			else:
+				return False
 	except FileNotFoundError:
 		return False
 
@@ -330,7 +328,6 @@ def save_user(user, data):
 			'username': user,
 			'scores': []
 		})
-
 	save(data)
 
 
@@ -342,6 +339,7 @@ def save(data):
 def get_user(user):
 	print('getting user')
 	pass
+
 
 def get_input_key(settings, stats, screen, sb, ship, aliens, bullets, play_button):
 	while True:
