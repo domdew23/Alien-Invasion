@@ -29,7 +29,7 @@ def run_game():
 
 	# Make the Play as Guest Button
 	play_button = Button(settings, screen, "Play as Guest", adj_y=60)
-	
+
 	# Create a instance to store game stats and create a scoreboard
 	stats = GameStats(settings)
 	sb = Scoreboard(settings, screen, stats)

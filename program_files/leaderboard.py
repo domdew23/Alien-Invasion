@@ -1,14 +1,14 @@
 import pygame.font
+import colors
 
 from pygame.sprite import Group
-import colors
 from ship import Ship
 
 class LeaderBoard():
-	# Class to report scoring information
+	# Class to report the all time scores
 
 	def __init__(self, settings, screen):
-		# Initialize scorekeeping attributes
+		# Initialize attributes
 		self.screen = screen
 		self.screen_rect = screen.get_rect()
 		self.settings = settings
@@ -16,18 +16,6 @@ class LeaderBoard():
 
 		# Font settings for leaderboard
 		self.font = pygame.font.SysFont(None, 48)
-
-	def prep(self):
-		i = 1
-		move = 0
-		for d in self.stats.top_scores:
-			for name, score in d.items():
-				if i <= 10:
-					move += 50
-					self.check_current_score(score)
-					self.prep_scores(score, move)
-					self.prep_names(name, move)
-				i += 1
 
 
 	def check_current_score(self, score):
