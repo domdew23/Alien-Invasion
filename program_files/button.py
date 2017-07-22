@@ -23,6 +23,13 @@ class Button():
 		self.msg_image_rect = self.msg_image.get_rect()
 		self.msg_image_rect.center = self.rect.center
 
+	def edit_msg(self, msg):
+		self.prep_msg(msg)
+
+
+	def edit_pos(self, adj_x=0, adj_y=0):
+		self.rect.centerx = self.screen_rect.centerx + adj_x
+		self.rect.centery = self.screen_rect.centery + adj_y
 
 	def draw(self):
 		# Draw blank button and then draw message

@@ -167,6 +167,10 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 		else:
 			if stats.game_over:
 				lb.draw_leaderboard()
+				play_button.edit_pos(adj_y=300)
+				play_button.edit_msg("Play Again")
+				play_button.draw()
+
 			else:
 				# Draw the play button if the game is inactive
 				play_button.draw()
