@@ -1,6 +1,7 @@
 import pygame.font
 
 from pygame.sprite import Group
+import colors
 from ship import Ship
 
 class Scoreboard():
@@ -14,7 +15,7 @@ class Scoreboard():
 		self.stats = stats
 
 		# Font settings for scoreboard
-		self.text_color = (30, 30, 30)
+		self.text_color = colors.white
 		self.font = pygame.font.SysFont(None, 48)
 
 		# Prepare the initial score image

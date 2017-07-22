@@ -170,7 +170,6 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 				play_button.edit_pos(adj_y=300)
 				play_button.edit_msg("Play Again")
 				play_button.draw()
-
 			else:
 				# Draw the play button if the game is inactive
 				play_button.draw()
@@ -178,8 +177,6 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 				while stats.user == '':
 					no_username(settings, screen, play_button, "Please enter a username or click play as guest")
 					stats.user = get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")
-				print(stats.user)
-
 				if check_user(stats.user):
 					get_user(stats.user)
 				else:
@@ -240,7 +237,6 @@ def ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets):
 		all_time_scores(stats)
 		stats.game_over = True
 		lb.stats = stats
-		lb.prep()
 		print("GAME OVER")
 
 

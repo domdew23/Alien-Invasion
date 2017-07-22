@@ -11,7 +11,7 @@ class Settings():
 		# Initialize game's static settings
 		self.screen_x = 1310
 		self.screen_y = 800
-		self.bg_color = colors.light_gray
+		self.bg_color = colors.black
 
 		# Ship settings
 		self.ship_limit = 3
