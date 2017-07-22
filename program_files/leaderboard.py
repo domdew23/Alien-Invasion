@@ -6,12 +6,13 @@ from ship import Ship
 class LeaderBoard():
 	# Class to report scoring information
 
-	def __init__(self, settings, screen, stats):
+	def __init__(self, settings, screen):
 		# Initialize scorekeeping attributes
 		self.screen = screen
 		self.screen_rect = screen.get_rect()
 		self.settings = settings
-		self.stats = stats
+		#self.stats = stats
+		self.stats = None
 
 		self.score_images = []
 		self.name_images = []
@@ -23,13 +24,10 @@ class LeaderBoard():
 		self.text_color = (30, 30, 30)
 		self.font = pygame.font.SysFont(None, 48)
 
-		self.prep()
+		#self.prep()
 
-		print(str(len(self.name_images)))
-		for im in self.name_images:
-			print(im)
-			r = im.get_rect()
-			print(str(r.centerx))
+		print("made new leadeboard")
+		print(self.score_images)
 
 	def prep(self):
 		i = 0

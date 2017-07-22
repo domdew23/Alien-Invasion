@@ -33,8 +33,7 @@ def run_game():
 	# Create a instance to store game stats and create a scoreboard
 	stats = GameStats(settings)
 	sb = Scoreboard(settings, screen, stats)
-	gf.all_time_scores(stats)
-	lb = LeaderBoard(settings, screen, stats)
+	lb = LeaderBoard(settings, screen)
 
 	# Create a ship, alien, and groups to store bullets and alien fleet
 	ship = Ship(screen, settings)
@@ -50,7 +49,7 @@ def run_game():
 		if stats.game_active:
 			ship.update()
 			gf.update_bullets(settings, stats, screen, sb, ship, aliens, bullets)
-			gf.update_aliens(settings, stats, screen, sb, ship, aliens, bullets)
+			gf.update_aliens(settings, stats, screen, sb, lb, ship, aliens, bullets)
 		gf.update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, True)
 		
 run_game()

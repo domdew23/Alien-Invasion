@@ -28,6 +28,7 @@ import string
 from bullets import Bullet
 from alien import Alien
 from button import Button
+from leaderboard import LeaderBoard
 from time import sleep
 from pygame.locals import *
 
@@ -195,20 +196,20 @@ def update_bullets(settings, stats, screen, sb, ship, aliens, bullets):
 	check_bullet_alien_collisions(settings, stats, screen, sb, ship, aliens, bullets)
 
 
-def update_aliens(settings, stats, screen, sb, ship, aliens, bullets):
+def update_aliens(settings, stats, screen, sb, lb, ship, aliens, bullets):
 	# Update the positions of all aliens in the fleet
 	check_fleet_edges(settings, aliens)
 	aliens.update()
 
 	# Look for alien-ship collisions
 	if pygame.sprite.spritecollideany(ship, aliens):
-		ship_hit(settings, stats, screen, sb, ship, aliens, bullets)
+		ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets)
 
-	check_aliens_bottom(settings, stats, screen, sb, ship, aliens, bullets)
+	check_aliens_bottom(settings, stats, screen, sb, lb, ship, aliens, bullets)
 
 
 
-def ship_hit(settings, stats, screen, sb, ship, aliens, bullets):
+def ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets):
 	# Respond to ship being hit by alien
 	if stats.ships_left > 0:
 		# Decrement ships left
@@ -234,6 +235,8 @@ def ship_hit(settings, stats, screen, sb, ship, aliens, bullets):
 		save_score(stats.score, stats.user)
 		all_time_scores(stats)
 		stats.game_over = True
+		lb.stats = stats
+		lb.prep()
 		print("GAME OVER")
 
 
@@ -278,13 +281,13 @@ def change_fleet_direction(settings, aliens):
 	settings.fleet_direction *= -1
 
 
-def check_aliens_bottom(settings, stats, screen, sb, ship, aliens, bullets):
+def check_aliens_bottom(settings, stats, screen, sb, lb, ship, aliens, bullets):
 	# Check if any aliens have reached the bottom of the screen
 	screen_rect = screen.get_rect()
 	for alien in aliens.sprites():
 		if alien.rect.bottom >= screen_rect.bottom:
 			# Treat the same way as if a ship got hit
-			ship_hit(settings, stats, screen, sb, ship, aliens, bullets)
+			ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets)
 			break
 
 
