@@ -4,6 +4,7 @@
 '''
 import pygame
 import colors
+
 class Settings():
 	# Class to store all settings for Alien Invasion
 
@@ -37,6 +38,9 @@ class Settings():
 		self.button_text_color = colors.white
 		self.button_font = pygame.font.SysFont(None, 48)
 
+		# File settings
+		self.scores_file = '../data_files/scores.json'
+
 		self.initialize_dynamic_settings()
 
 
@@ -62,4 +66,12 @@ class Settings():
 		print("ALIENS ARE NOW WORTH " + str(self.alien_points) + " POINTS EACH")
 
 
-
+	def init_data(self, user):
+		data = {
+			'users': [
+				{
+					'username': user,
+					'scores': []
+				}]
+			}
+		return data

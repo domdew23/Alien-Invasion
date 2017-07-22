@@ -2,6 +2,7 @@ import game_functions as gf
 import pygame
 import string
 import colors
+import sys
 
 from pygame.locals import *
 from button import Button
@@ -37,6 +38,7 @@ def display_box(settings, stats, screen, sb, lb, ship, aliens, bullets, play_but
 	if len(message) != 0:
 		screen.blit(fontobject.render(message, 1, colors.white), (box_x, box_y))
 	gf.update_screen(settings, stats, screen, sb,lb, ship, aliens, bullets, play_button)
+
 
 def get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, message):
 	# ask(screen, question) -> answer
