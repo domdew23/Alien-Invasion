@@ -31,6 +31,7 @@ class LeaderBoard():
 
 
 	def check_current_score(self, score):
+		# Check if the latest score was a high score
 		if self.stats.score == score:
 			self.text_color = colors.yellow
 		else:
@@ -44,24 +45,21 @@ class LeaderBoard():
 		score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 		score_image_rect = score_image.get_rect()
 		score_image_rect.y = (self.screen_rect.top + 100) + move
-		score_image_rect.x = (self.screen_rect.right - 150)
+		score_image_rect.x = (self.screen_rect.left + 300)
 		return score_image, score_image_rect
-		#self.score_images.append(score_image)
-		#self.score_rects.append(score_image_rect)
 
 
 	def prep_names(self, name, move):
-		# Display score at the top right of the screen
+		# Turn the names into a rendered image
 		name_image = self.font.render(name.title(), True, self.text_color, self.settings.bg_color)
 		name_image_rect = name_image.get_rect()
 		name_image_rect.y = (self.screen_rect.top + 100) + move
-		name_image_rect.x = (self.screen_rect.left + 300)
+		name_image_rect.x = (self.screen_rect.right - 150)
 		return name_image, name_image_rect
-		#self.name_images.append(name_image)
-		#self.name_rects.append(name_image_rect)
 
 
-	def prep_places(self, place, name_rect):
+	def prep_places(self, place, score_rect):
+		# Turn the place rankings into a rendered image
 		if place == 1:
 			place_str = str(place) + "st"
 		elif place == 2:
@@ -73,15 +71,16 @@ class LeaderBoard():
 
 		place_image = self.font.render(place_str, True, self.text_color, self.settings.bg_color)
 		place_image_rect = place_image.get_rect()
-		place_image_rect.centery = name_rect.centery
-		place_image_rect.centerx = name_rect.centerx - 200
+		place_image_rect.centery = score_rect.centery
+		place_image_rect.centerx = score_rect.centerx - 200
 		return place_image, place_image_rect
 
 
 	def draw_header(self, score_rect, name_rect):
-		score_header_image = self.font.render("Score", True, self.text_color, self.settings.bg_color)
-		name_header_image = self.font.render("Name", True, self.text_color, self.settings.bg_color)
-		rank_header_image = self.font.render("Rank", True, self.text_color, self.settings.bg_color)
+		# Draw the header of the leaderboard to the screen
+		score_header_image = self.font.render("Score", True, colors.cyan, self.settings.bg_color)
+		name_header_image = self.font.render("Name", True, colors.cyan, self.settings.bg_color)
+		rank_header_image = self.font.render("Rank", True, colors.cyan, self.settings.bg_color)
 
 		score_header_rect = score_header_image.get_rect()
 		name_header_rect = name_header_image.get_rect()
@@ -93,8 +92,8 @@ class LeaderBoard():
 		name_header_rect.right = name_rect.right
 		name_header_rect.centery = name_rect.centery - 500
 
-		rank_header_rect.centerx = name_header_rect.centerx - 200
-		rank_header_rect.centery = name_header_rect.centery
+		rank_header_rect.centerx = score_header_rect.centerx - 200
+		rank_header_rect.centery = score_header_rect.centery
 
 		self.screen.blit(score_header_image, score_header_rect)
 		self.screen.blit(name_header_image, name_header_rect)
@@ -102,13 +101,15 @@ class LeaderBoard():
 
 
 	def draw_game_over(self):
-		game_over_image = self.font.render("Game Over.", True, self.text_color, self.settings.bg_color)
+		# Draw 'Game Over' at the top of the screen
+		game_over_image = self.font.render("Game Over.", True, colors.red, self.settings.bg_color)
 		game_over_image_rect = game_over_image.get_rect()
 		game_over_image_rect.centerx = self.screen_rect.centerx
 		game_over_image_rect.top = self.screen_rect.top + 20
 		self.screen.blit(game_over_image, game_over_image_rect)
 
 	def draw_leaderboard(self):
+		# Draw the leaderboard
 		i = 1
 		move = 0
 		for d in self.stats.top_scores:
@@ -118,7 +119,7 @@ class LeaderBoard():
 					self.check_current_score(score)
 					score_image, score_rect = self.prep_scores(score, move)
 					name_image, name_rect = self.prep_names(name, move)
-					place_image, place_rect = self.prep_places(i, name_rect)
+					place_image, place_rect = self.prep_places(i, score_rect)
 					self.screen.blit(name_image, name_rect)
 					self.screen.blit(place_image, place_rect)
 					self.screen.blit(score_image, score_rect)
