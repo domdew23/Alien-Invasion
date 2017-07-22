@@ -10,6 +10,7 @@ class GameStats():
 
 		# Start game in inactive state
 		self.game_active = False
+		self.game_over = False
 
 		# High Score should never be reset
 		# self.high_score = 0
