@@ -19,7 +19,8 @@ class GameStats():
 		self.data = {}
 		self.data['users'] = []
 
-		self.all_time_scores = []
+		self.top_scores = []
+
 
 	def reset(self):
 		# Initialize statistics that can change during game
