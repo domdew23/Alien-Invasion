@@ -74,18 +74,18 @@ class LeaderBoard():
 		place_image = self.font.render(place_str, True, self.text_color, self.settings.bg_color)
 		place_image_rect = place_image.get_rect()
 		place_image_rect.centery = name_rect.centery
-		place_image_rect.centerx = name_rect.centerx - 100
+		place_image_rect.centerx = name_rect.centerx - 200
 		return place_image, place_image_rect
 
 
 	def draw_header(self, score_rect, name_rect):
 		score_header_image = self.font.render("Score", True, self.text_color, self.settings.bg_color)
 		name_header_image = self.font.render("Name", True, self.text_color, self.settings.bg_color)
-		#level_header_image = self.font.render("Level", True, self.text_color, self.settings.bg_color)
+		rank_header_image = self.font.render("Rank", True, self.text_color, self.settings.bg_color)
 
 		score_header_rect = score_header_image.get_rect()
 		name_header_rect = name_header_image.get_rect()
-		#level_header_rect = level_header_image.get_rect()
+		rank_header_rect = rank_header_image.get_rect()
 
 		score_header_rect.right = score_rect.right
 		score_header_rect.centery = score_rect.centery - 500
@@ -93,8 +93,12 @@ class LeaderBoard():
 		name_header_rect.right = name_rect.right
 		name_header_rect.centery = name_rect.centery - 500
 
+		rank_header_rect.centerx = name_header_rect.centerx - 200
+		rank_header_rect.centery = name_header_rect.centery
+
 		self.screen.blit(score_header_image, score_header_rect)
 		self.screen.blit(name_header_image, name_header_rect)
+		self.screen.blit(rank_header_image, rank_header_rect)
 
 
 	def draw_game_over(self):
