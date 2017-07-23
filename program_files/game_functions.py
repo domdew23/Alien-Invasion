@@ -23,16 +23,13 @@ import sys
 import pygame
 import json
 import colors
-import string
 import os
 import textbox as tb
 
 from bullets import Bullet
 from alien import Alien
 from button import Button
-from leaderboard import LeaderBoard
 from time import sleep
-from pygame.locals import *
 
 
 def respond_keydown(event, settings, screen, ship, bullets):
