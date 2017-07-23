@@ -3,6 +3,7 @@ import colors
 
 from pygame.sprite import Group
 from ship import Ship
+from game_stats import GameStats as stats
 
 class Scoreboard():
 	# Class to report scoring information

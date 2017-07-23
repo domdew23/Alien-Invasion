@@ -21,9 +21,9 @@ class LeaderBoard():
 	def check_current_score(self, score, rank):
 		# Check if the latest score was a high score
 		if self.stats.score == score:
-			if self.settings.score_rank == 0:
-				self.settings.score_rank = rank
-			elif self.settings.score_rank == rank:
+			if self.stats.score_rank == 0:
+				self.stats.score_rank = rank
+			elif self.stats.score_rank == rank:
 				self.text_color = colors.yellow
 			else:
 				self.text_color = colors.white
@@ -116,7 +116,7 @@ class LeaderBoard():
 		# Draw 'Game Over' at the top of the screen
 		game_over_image = self.font.render("Game Over.", True, colors.red, self.settings.bg_color)
 		game_over_image_rect = game_over_image.get_rect()
-		game_over_image_rect.centerx = self.screen_rect.centerx - 300
+		game_over_image_rect.centerx = self.screen_rect.centerx - 350
 		game_over_image_rect.top = self.screen_rect.top + 3
 		self.screen.blit(game_over_image, game_over_image_rect)
 

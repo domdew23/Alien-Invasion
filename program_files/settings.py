@@ -4,6 +4,7 @@
 '''
 import pygame
 import colors
+from game_stats import GameStats as stats
 
 class Settings():
 	# Class to store all settings for Alien Invasion
@@ -18,7 +19,7 @@ class Settings():
 		self.ship_limit = 3
 
 		# Bullet settings
-		self.bullet_width = 300
+		self.bullet_width = 3000
 		self.bullet_height = 75
 		self.bullet_color = 60, 60, 60
 		self.bullets_allowed = 3
@@ -40,9 +41,6 @@ class Settings():
 
 		# File settings
 		self.scores_file = '../data_files/scores.json'
-
-		self.score_rank = 0
-
 		self.initialize_dynamic_settings()
 
 
