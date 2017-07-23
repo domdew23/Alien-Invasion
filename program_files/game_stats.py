@@ -1,5 +1,5 @@
 import json
-
+import game_functions as gf
 class GameStats():
 	# Track statistics ffor Alien Invasion
 
@@ -13,7 +13,7 @@ class GameStats():
 		self.game_over = False
 
 		# High Score should never be reset
-		self.get_high_score()
+		self.high_score = 0
 
 		self.user = ''
 		self.data = {}
@@ -30,11 +30,3 @@ class GameStats():
 		self.score = 0
 		self.level = 1
 		self.score_rank = 0
-
-
-	def get_high_score(self):
-		try:
-			with open('../data_files/all_time_score.json') as file:
-				self.high_score = json.load(file)
-		except FileNotFoundError:
-			self.high_score = 0

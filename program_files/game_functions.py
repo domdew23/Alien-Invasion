@@ -255,7 +255,7 @@ def check_bullet_alien_collisions(settings, stats, screen, sb, ship, aliens, bul
 			stats.score += settings.alien_points * len(aliens)
 			sb.draw_score()
 			print("ALIEN HIT --- PLUS " + str(settings.alien_points) + " POINTS!!")
-		check_high_score(stats, sb)
+		check_high_score(stats, sb, settings)
 
 	if len(aliens) == 0:
 		# Destroy existing bullets, create new fleet and increase level
@@ -295,13 +295,11 @@ def check_aliens_bottom(settings, stats, screen, sb, lb, ship, aliens, bullets):
 			break
 
 
-def check_high_score(stats, sb):
+def check_high_score(stats, sb, settings):
 	# Check to see if there's a new high score
 	if stats.score > stats.high_score:
 		stats.high_score = stats.score
 		sb.draw_high_score()
-		save_score(stats.score)
-
 
 def save_score(score, user, settings):
 	with open(settings.scores_file) as file:
@@ -365,3 +363,5 @@ def all_time_scores(stats, settings):
 					dicts.append(tmp)
 
 	stats.top_scores = sorted(dicts, key=lambda k: list(k.values()), reverse=True)
+	high_score_dict = stats.top_scores[0]
+	stats.high_score = list(high_score_dict.values())[0]

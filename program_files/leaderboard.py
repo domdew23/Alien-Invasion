@@ -20,15 +20,12 @@ class LeaderBoard():
 
 	def check_current_score(self, score, rank):
 		# Check if the latest score was a high score
+		self.text_color = colors.white
 		if self.stats.score == score:
 			if self.stats.score_rank == 0:
 				self.stats.score_rank = rank
 			elif self.stats.score_rank == rank:
 				self.text_color = colors.yellow
-			else:
-				self.text_color = colors.white
-		else:
-			self.text_color = colors.white
 
 
 	def prep_scores(self, score, move):
