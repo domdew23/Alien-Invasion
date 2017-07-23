@@ -168,21 +168,10 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 			aliens.draw(screen)
 		else:
 			if stats.game_over:
-				lb.draw_leaderboard()
-				sb.draw_text()
-				sb.draw_high_score()
-				sb.draw_score()
-				sb.draw_level()
-				play_button.edit_pos(adj_y=350)
-				play_button.edit_msg("Play Again")
-				play_button.draw()
+				update_leaderboard(sb, lb, play_button)
 			else:
-				# Draw the play button if the game is inactive
-				play_button.draw()
-				stats.user = tb.get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")
-				while stats.user == '':
-					tb.no_username(settings, screen, play_button, "Please enter a username or click play as guest")
-					stats.user = tb.get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")
+				# Get username or guest
+				check_user(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button)
 				stats.game_active = True
 	# Make the most recently drawn screen visible
 	pygame.display.flip()
@@ -210,6 +199,16 @@ def update_aliens(settings, stats, screen, sb, lb, ship, aliens, bullets):
 
 	check_aliens_bottom(settings, stats, screen, sb, lb, ship, aliens, bullets)
 
+
+def update_leaderboard(sb, lb, play_button):
+	lb.draw_leaderboard()
+	sb.draw_text()
+	sb.draw_high_score()
+	sb.draw_score()
+	sb.draw_level()
+	play_button.edit_pos(adj_y=350)
+	play_button.edit_msg("Play Again")
+	play_button.draw()	
 
 
 def ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets):
@@ -264,7 +263,6 @@ def check_bullet_alien_collisions(settings, stats, screen, sb, ship, aliens, bul
 		stats.level += 1
 		sb.draw_level()
 		print("FLEET DESTROYED -- NEW LEVEL")
-
 		create_fleet(settings, screen, ship, aliens)
 
 
@@ -291,6 +289,14 @@ def check_aliens_bottom(settings, stats, screen, sb, lb, ship, aliens, bullets):
 			# Treat the same way as if a ship got hit
 			ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets)
 			break
+
+
+def check_user(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button):
+	play_button.draw()
+	stats.user = tb.get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")
+	while stats.user == '':
+		tb.no_username(settings, screen, play_button, "Please enter a username or click play as guest")
+		stats.user = tb.get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")	
 
 
 def check_high_score(stats, sb, settings):
@@ -325,6 +331,7 @@ def all_time_scores(stats, settings):
 			data = json.load(file)
 		stats.top_scores = sorted(data['scores'], key=lambda k: k['score'], reverse=True)
 		get_top_score(stats, settings)
+
 
 def get_top_score(stats, settings):
 	if os.path.exists(settings.scores_file):

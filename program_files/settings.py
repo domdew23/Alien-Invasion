@@ -18,7 +18,7 @@ class Settings():
 		self.ship_limit = 3
 
 		# Bullet settings
-		self.bullet_width = 3000
+		self.bullet_width = 30
 		self.bullet_height = 75
 		self.bullet_color = 60, 60, 60
 		self.bullets_allowed = 3
@@ -49,7 +49,7 @@ class Settings():
 		# Initialize settings that change throughout the game
 		self.ship_speed_factor = 1.6
 		self.bullet_speed_factor = 3
-		self.alien_speed_factor = 100 # 1
+		self.alien_speed_factor = 1 # 1
 
 		# fleet_direction of 1 represents right; -1 represents left
 		self.fleet_direction = 1
@@ -64,10 +64,10 @@ class Settings():
 		self.bullet_speed_factor *= self.speedup_scale
 		self.alien_speed_factor *= self.speedup_scale
 		self.alien_points = int(self.alien_points * self.score_scale)
-		print("ALIENS ARE NOW WORTH " + str(self.alien_points) + " POINTS EACH")
 
 
 	def init_data(self, user, score, level):
+		# Add first user if no file exists yet
 		data = {
 			'users': [
 				{

@@ -116,6 +116,7 @@ class LeaderBoard():
 
 
 	def draw_score(self):
+		# Draw each top 10 scorer's name, rank, score and level
 		self.screen.blit(self.name_image, self.name_rect)
 		self.screen.blit(self.rank_image, self.rank_rect)
 		self.screen.blit(self.score_image, self.score_rect)
