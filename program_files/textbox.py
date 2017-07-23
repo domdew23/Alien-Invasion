@@ -28,7 +28,7 @@ def display_box(settings, stats, screen, sb, lb, ship, aliens, bullets, play_but
 	# Print a message in a box in the middle of the screen 
 	box_width, box_height = 320, 50
 	box_x, box_y = (screen.get_width() / 2) - 158, (screen.get_height() / 2) - 50
-	fontobject = pygame.font.Font(None,18)
+	fontobject = pygame.font.Font(settings.text_font, 9)
 
 	# Black background
 	pygame.draw.rect(screen, colors.black, (box_x, box_y, box_width, box_height))
@@ -73,6 +73,7 @@ def get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_bu
 
 
 def show_button(settings, screen):
+	settings.button_font = pygame.font.Font(settings.text_font, 16)
 	press_enter_to_play = Button(settings, screen, "Press Enter to Play", adj_y=120)
 	press_enter_to_play.draw()
 
@@ -84,7 +85,7 @@ def del_button(settings, stats, screen, sb, lb, ship, aliens, bullets, play_butt
 
 
 def no_username(settings, screen, play_button, message):
-	font = pygame.font.SysFont(None, 48)
+	font = pygame.font.Font(settings.text_font, 24)
 	text_image = font.render(message, True, colors.white, settings.bg_color)
 
 	text_rect = text_image.get_rect()

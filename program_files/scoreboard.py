@@ -16,7 +16,7 @@ class Scoreboard():
 
 		# Font settings for scoreboard
 		self.text_color = colors.white
-		self.font = pygame.font.SysFont(None, 48)
+		self.font = pygame.font.Font(settings.text_font, 24)
 		
 
 	def draw_score(self):
@@ -60,7 +60,7 @@ class Scoreboard():
 
 		# Position the level below the score
 		self.level_rect = self.level_image.get_rect()
-		self.level_rect.right = self.high_score_rect.left - 300
+		self.level_rect.right = self.high_score_rect.left - 200
 		self.level_rect.top = self.screen_rect.top + 13
 		self.screen.blit(self.level_image, self.level_rect)
 

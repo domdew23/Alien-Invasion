@@ -32,14 +32,16 @@ class Settings():
 		# Scale for increasing point values
 		self.score_scale = 1.5
 
+		# File settings
+		self.scores_file = '../data_files/scores.json'
+		self.text_font = '../fonts/Arcade.ttf'
+
 		# Play button settings
 		self.button_width, self.button_height = 320, 50
 		self.button_color = colors.lime
 		self.button_text_color = colors.white
-		self.button_font = pygame.font.SysFont(None, 48)
+		self.button_font = pygame.font.Font(self.text_font, 24)
 
-		# File settings
-		self.scores_file = '../data_files/scores.json'
 		self.initialize_dynamic_settings()
 
 
