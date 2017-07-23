@@ -121,6 +121,16 @@ class LeaderBoard():
 		self.screen.blit(game_over_image, game_over_image_rect)
 
 
+
+	def draw_scores(self, score, name, rank, move):
+		score_image, score_rect = self.prep_scores(score, move)
+		name_image, name_rect = self.prep_names(name, move)
+		rank_image, rank_rect = self.prep_ranks(rank, move)
+		self.screen.blit(name_image, name_rect)
+		self.screen.blit(rank_image, rank_rect)
+		self.screen.blit(score_image, score_rect)
+
+
 	def draw_leaderboard(self):
 		# Draw the leaderboard
 		self.draw_header()
@@ -133,10 +143,5 @@ class LeaderBoard():
 				if rank <= 10:
 					move += 50
 					self.check_current_score(score, rank)
-					score_image, score_rect = self.prep_scores(score, move)
-					name_image, name_rect = self.prep_names(name, move)
-					rank_image, rank_rect = self.prep_ranks(rank, move)
-					self.screen.blit(name_image, name_rect)
-					self.screen.blit(rank_image, rank_rect)
-					self.screen.blit(score_image, score_rect)
+					self.draw_scores(score, name, rank, move)
 				rank += 1
