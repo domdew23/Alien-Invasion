@@ -184,7 +184,7 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 				if check_user(stats.user, settings):
 					pass
 				else:
-					save_user(stats.user, stats.data, settings)
+					save_user(stats.user, settings)
 				stats.game_active = True
 	# Make the most recently drawn screen visible
 	pygame.display.flip()
@@ -328,7 +328,7 @@ def check_user(user, settings):
 		save(settings.init_data(user), settings)
 		return True
 
-def save_user(user, data, settings):
+def save_user(user, settings):
 	data = {}
 	with open(settings.scores_file, 'r+') as file:
 		data = json.load(file)

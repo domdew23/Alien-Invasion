@@ -30,7 +30,7 @@ def run_game():
 	# Make the Play as Guest Button
 	play_button = Button(settings, screen, "Play as Guest", adj_y=60)
 
-	# Create a instance to store game stats and create a scoreboard
+	# Create a instance to store game stats and create a scoreboard, leaderboard
 	stats = GameStats(settings)
 	sb = Scoreboard(settings, screen, stats)
 	lb = LeaderBoard(settings, screen)
@@ -43,7 +43,10 @@ def run_game():
 
 	# Create the fleet of aliens
 	gf.create_fleet(settings, screen, ship, aliens)
+
+	# Load in all time scores
 	gf.all_time_scores(stats,settings)
+
 	# Start the main loop for the game
 	while True:
 		gf.check_events(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button)

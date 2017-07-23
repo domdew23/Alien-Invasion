@@ -3,7 +3,6 @@ import colors
 
 from pygame.sprite import Group
 from ship import Ship
-from game_stats import GameStats as stats
 
 class Scoreboard():
 	# Class to report scoring information
@@ -18,13 +17,7 @@ class Scoreboard():
 		# Font settings for scoreboard
 		self.text_color = colors.white
 		self.font = pygame.font.SysFont(None, 48)
-
-		# Prepare the initial score image
-		#self.prep_score()
-		#self.prep_high_score()
-		#self.prep_level()
-		#self.prep_ships()
-		#self.prep_text()
+		
 
 	def draw_score(self):
 		# Turn the score into a rendered image

@@ -16,11 +16,7 @@ class GameStats():
 		self.high_score = 0
 
 		self.user = ''
-		self.data = {}
-		self.data['users'] = []
-
 		self.top_scores = []
-
 		self.score_rank = 0
 
 
