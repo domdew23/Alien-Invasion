@@ -5,7 +5,7 @@ In Alien Invasion, the player controls a shit that appears at the bottom center 
 
 ## Getting Started
 
-To play Alien Invasion download the repository and navigate to the 'program_files' directory. From there run the command from the command line 'python alien_invasion.py'. Press play and the game will begin.
+To play Alien Invasion download the repository and navigate to the [program_files](https://github.com/domdew23/Alien-Invasion/tree/master/program_files) directory. From there run the command from the command line 'python [alien_invasion.py](https://github.com/domdew23/Alien-Invasion/blob/master/program_files/alien_invasion.py)'. Press play and the game will begin.
 
 ### Prerequisites
 
