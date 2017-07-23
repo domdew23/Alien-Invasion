@@ -81,10 +81,10 @@ class LeaderBoard():
 		self.rank_header_rect = rank_header_image.get_rect()
 
 		self.score_header_rect.x = (self.screen_rect.left + 300)
-		self.score_header_rect.y = (self.screen_rect.top + 100)
+		self.score_header_rect.y = (self.screen_rect.top + 130)
 
 		self.name_header_rect.x = (self.screen_rect.right - 150)
-		self.name_header_rect.y = (self.screen_rect.top + 100)
+		self.name_header_rect.y = self.score_header_rect.y
 
 		self.rank_header_rect.x = self.score_header_rect.x - 200
 		self.rank_header_rect.y = self.score_header_rect.y

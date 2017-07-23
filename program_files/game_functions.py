@@ -166,14 +166,12 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 
 			# Draw aliens to the screen
 			aliens.draw(screen)
-
-
 		else:
 			if stats.game_over:
 				lb.draw_leaderboard()
 				sb.draw_text()
 				sb.draw_high_score()
-				play_button.edit_pos(adj_y=300)
+				play_button.edit_pos(adj_y=350)
 				play_button.edit_msg("Play Again")
 				play_button.draw()
 			else:
@@ -184,9 +182,8 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 					tb.no_username(settings, screen, play_button, "Please enter a username or click play as guest")
 					stats.user = tb.get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")
 				if check_user(stats.user, settings):
-					get_user(stats.user)
+					pass
 				else:
-					print("here")
 					save_user(stats.user, stats.data, settings)
 				stats.game_active = True
 	# Make the most recently drawn screen visible
@@ -347,11 +344,6 @@ def save_user(user, data, settings):
 def save(data, settings):
 	with open(settings.scores_file, 'w') as file:
 		json.dump(data, file, indent=4)
-
-
-def get_user(user):
-	print('getting user')
-	pass
 
 
 def all_time_scores(stats, settings):

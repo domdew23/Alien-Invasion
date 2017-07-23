@@ -4,7 +4,6 @@
 '''
 import pygame
 import colors
-from game_stats import GameStats as stats
 
 class Settings():
 	# Class to store all settings for Alien Invasion

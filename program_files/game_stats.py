@@ -13,7 +13,6 @@ class GameStats():
 		self.game_over = False
 
 		# High Score should never be reset
-		# self.high_score = 0
 		self.get_high_score()
 
 		self.user = ''
