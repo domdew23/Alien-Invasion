@@ -1,5 +1,5 @@
 import json
-import game_functions as gf
+
 class GameStats():
 	# Track statistics ffor Alien Invasion
 

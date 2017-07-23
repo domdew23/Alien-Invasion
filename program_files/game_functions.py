@@ -181,10 +181,6 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 				while stats.user == '':
 					tb.no_username(settings, screen, play_button, "Please enter a username or click play as guest")
 					stats.user = tb.get_username(settings, stats, screen, sb, lb, ship, aliens, bullets, play_button, "Username: ")
-				if check_user(stats.user, settings):
-					pass
-				else:
-					save_user(stats.user, settings)
 				stats.game_active = True
 	# Make the most recently drawn screen visible
 	pygame.display.flip()
@@ -237,7 +233,7 @@ def ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets):
 	else:
 		stats.game_active = False
 		pygame.mouse.set_visible(True)
-		save_score(stats.score, stats.user, settings)
+		save_score(stats.score, stats.user, stats.level, stats.high_score, settings)
 		all_time_scores(stats, settings)
 		stats.game_over = True
 		lb.stats = stats
@@ -301,42 +297,20 @@ def check_high_score(stats, sb, settings):
 		stats.high_score = stats.score
 		sb.draw_high_score()
 
-def save_score(score, user, settings):
-	with open(settings.scores_file) as file:
-		data = json.load(file)
-		saved_user = find_user(user, data)
-		saved_user['scores'].append(score)
-	save(data, settings)
 
-
-def find_user(user, data):
-	for saved_user in data['users']:
-		if saved_user['username'] == user:
-			return saved_user
-	return None
-
-
-def check_user(user, settings):
-	try:
-		with open(settings.scores_file) as file:
+def save_score(score, user, level, high_score, settings):
+	if os.path.exists(settings.scores_file):
+		with open(settings.scores_file, 'r+') as file:
 			data = json.load(file)
-			if find_user(user, data) != None:
-				return True
-			else:
-				return False
-	except FileNotFoundError:
-		save(settings.init_data(user), settings)
-		return True
-
-def save_user(user, settings):
-	data = {}
-	with open(settings.scores_file, 'r+') as file:
-		data = json.load(file)
 		data['users'].append({
 			'username': user,
-			'scores': []
+			'score': score,
+			'level': level
 		})
-	save(data, settings)
+		data['all_time_score'] = high_score
+		save(data, settings)
+	else:
+		save(settings.init_data(user, score, level), settings)
 
 
 def save(data, settings):
@@ -345,23 +319,18 @@ def save(data, settings):
 
 
 def all_time_scores(stats, settings):
-	dicts = []
-	with open(settings.scores_file) as file:
-		data = json.load(file)
+		with open(settings.scores_file) as file:
+			data = json.load(file)
 		for user in data['users']:
-			user['scores'].sort(reverse=True)
-		tmp_list = sorted(data['users'], key=lambda k: max(k['scores']), reverse=True)
-		for item in tmp_list:
-			for k,v in item.items():
-				for score in v:
-					try:
-						score = int(score)
-					except ValueError:
-						continue
-					tmp = {}
-					tmp[item['username']] = score
-					dicts.append(tmp)
+			stats.top_scores = sorted(data['users'], key=lambda k: k['score'], reverse=True)
+		get_top_score(stats, settings)
 
-	stats.top_scores = sorted(dicts, key=lambda k: list(k.values()), reverse=True)
-	high_score_dict = stats.top_scores[0]
-	stats.high_score = list(high_score_dict.values())[0]
+
+def get_top_score(stats, settings):
+	if os.path.exists(settings.scores_file):
+		with open(settings.scores_file) as file:
+			data = json.load(file)
+		stats.high_score = data['all_time_score']
+	else:
+		stats.high_score = 0
+

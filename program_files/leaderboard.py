@@ -28,7 +28,7 @@ class LeaderBoard():
 				self.text_color = colors.yellow
 
 
-	def prep_scores(self, score, move):
+	def prep_score(self, score, move):
 		# Turn the scores into a rendered image
 		rounded_score = int(round(score, -1))
 		score_str = "{:,}".format(rounded_score)
@@ -39,7 +39,7 @@ class LeaderBoard():
 		return score_image, score_image_rect
 
 
-	def prep_names(self, name, move):
+	def prep_name(self, name, move):
 		# Turn the names into a rendered image
 		name_image = self.font.render(name.title(), True, self.text_color, self.settings.bg_color)
 		name_image_rect = name_image.get_rect()
@@ -48,7 +48,16 @@ class LeaderBoard():
 		return name_image, name_image_rect
 
 
-	def prep_ranks(self, rank, move):
+	def prep_level(self, level, move):
+		# Turn the names into a rendered image
+		level_image = self.font.render(str(level), True, self.text_color, self.settings.bg_color)
+		level_image_rect = level_image.get_rect()
+		level_image_rect.y =  self.level_header_rect.y + move
+		level_image_rect.right =  self.level_header_rect.right
+		return level_image, level_image_rect
+
+
+	def prep_rank(self, rank, move):
 		# Turn the place rankings into a rendered image
 		if rank == 1:
 			rank_str = str(rank) + "st"
@@ -71,11 +80,13 @@ class LeaderBoard():
 		score_header_image = self.font.render("Score", True, colors.cyan, self.settings.bg_color)
 		name_header_image = self.font.render("Name", True, colors.cyan, self.settings.bg_color)
 		rank_header_image = self.font.render("Rank", True, colors.cyan, self.settings.bg_color)
+		level_header_image = self.font.render("Level", True, colors.cyan, self.settings.bg_color)
 
 
 		self.score_header_rect = score_header_image.get_rect()
 		self.name_header_rect = name_header_image.get_rect()
 		self.rank_header_rect = rank_header_image.get_rect()
+		self.level_header_rect = level_header_image.get_rect()
 
 		self.score_header_rect.x = (self.screen_rect.left + 300)
 		self.score_header_rect.y = (self.screen_rect.top + 130)
@@ -86,9 +97,14 @@ class LeaderBoard():
 		self.rank_header_rect.x = self.score_header_rect.x - 200
 		self.rank_header_rect.y = self.score_header_rect.y
 
+		self.level_header_rect.x = self.name_header_rect.x - 200
+		self.level_header_rect.y = self.score_header_rect.y
+
 		self.screen.blit(score_header_image, self.score_header_rect)
 		self.screen.blit(name_header_image, self.name_header_rect)
 		self.screen.blit(rank_header_image, self.rank_header_rect)
+		self.screen.blit(level_header_image, self.level_header_rect)
+
 
 
 	def draw_your_score(self):
@@ -118,14 +134,11 @@ class LeaderBoard():
 		self.screen.blit(game_over_image, game_over_image_rect)
 
 
-
-	def draw_scores(self, score, name, rank, move):
-		score_image, score_rect = self.prep_scores(score, move)
-		name_image, name_rect = self.prep_names(name, move)
-		rank_image, rank_rect = self.prep_ranks(rank, move)
-		self.screen.blit(name_image, name_rect)
-		self.screen.blit(rank_image, rank_rect)
-		self.screen.blit(score_image, score_rect)
+	def draw_score(self):
+		self.screen.blit(self.name_image, self.name_rect)
+		self.screen.blit(self.rank_image, self.rank_rect)
+		self.screen.blit(self.score_image, self.score_rect)
+		self.screen.blit(self.level_image, self.level_rect)
 
 
 	def draw_leaderboard(self):
@@ -136,9 +149,17 @@ class LeaderBoard():
 		rank = 1
 		move = 20
 		for d in self.stats.top_scores:
-			for name, score in d.items():
-				if rank <= 10:
-					move += 50
-					self.check_current_score(score, rank)
-					self.draw_scores(score, name, rank, move)
+			if rank <= 10:
+				move += 50
+				self.check_current_score(d['score'], rank) 
+				for key, value in d.items():
+						if key == 'username':
+							self.name_image, self.name_rect = self.prep_name(value, move)
+						elif key == 'score':
+							score = value
+							self.score_image, self.score_rect = self.prep_score(value, move)
+						elif key == 'level':
+							self.level_image, self.level_rect = self.prep_level(value, move)
+				self.rank_image, self.rank_rect = self.prep_rank(rank, move)
+				self.draw_score()
 				rank += 1

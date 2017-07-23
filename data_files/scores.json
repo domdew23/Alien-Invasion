@@ -2,23 +2,54 @@
     "users": [
         {
             "username": "dom",
-            "scores": [
-                8082,
-                6966,
-                11169,
-                149922,
-                332937,
-                646434,
-                0,
-                365553
-            ]
+            "score": 7407,
+            "level": 4
         },
         {
-            "username": "timmay",
-            "scores": [
-                0,
-                850
-            ]
+            "username": "dom",
+            "score": 3150,
+            "level": 1
+        },
+        {
+            "username": "dom",
+            "score": 110412,
+            "level": 9
+        },
+        {
+            "username": "dom",
+            "score": 17406,
+            "level": 5
+        },
+        {
+            "username": "dom",
+            "score": 70461,
+            "level": 8
+        },
+        {
+            "username": "dom",
+            "score": 12789,
+            "level": 4
+        },
+        {
+            "username": "dom",
+            "score": 894330,
+            "level": 15
+        },
+        {
+            "username": "dom",
+            "score": 1696041,
+            "level": 16
+        },
+        {
+            "username": "dom",
+            "score": 2025,
+            "level": 2
+        },
+        {
+            "username": "dom",
+            "score": 0,
+            "level": 1
         }
-    ]
+    ],
+    "all_time_score": 1696041
 }

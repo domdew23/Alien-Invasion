@@ -45,7 +45,7 @@ def run_game():
 	gf.create_fleet(settings, screen, ship, aliens)
 
 	# Load in all time scores
-	gf.all_time_scores(stats,settings)
+	gf.get_top_score(stats, settings)
 
 	# Start the main loop for the game
 	while True:
