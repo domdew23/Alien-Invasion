@@ -2,8 +2,15 @@ data = {
 	"users": [
 		{
 		"username": "tim",
-		"scores": [0, 12]
-	}, 
+		"scores": [{
+					'level': 4,
+					'score': 300
+				},
+				{
+					'level': 2,
+					'score' 300
+				}]
+		}, 
 		{
 		"username": "dom",
 		"scores": [21, 2]

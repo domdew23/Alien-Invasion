@@ -24,6 +24,7 @@ import pygame
 import json
 import colors
 import string
+import os
 import textbox as tb
 
 from bullets import Bullet
@@ -69,10 +70,10 @@ def respond_play_button(settings, stats, screen, sb, lb, ship, aliens, bullets, 
 		# Reset game stats and scoreboard
 		stats.reset()
 		stats.game_active = True
-		sb.prep_score()
-		sb.prep_high_score()
-		sb.prep_level()
-		sb.prep_ships()
+		sb.draw_score()
+		sb.draw_high_score()
+		sb.draw_level()
+		sb.draw_ships()
 
 		# Empty the list of aliens and bullets
 		aliens.empty()
@@ -118,7 +119,7 @@ def create_alien(settings, screen, aliens, alien_number, row_number):
 	alien_width = alien.rect.width
 	alien.x = alien_width + 2 * alien_width * alien_number
 	alien.rect.x = alien.x
-	alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+	alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number + 20
 	aliens.add(alien)
 
 
@@ -160,14 +161,18 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 			# Draw ship to the screen
 			ship.blitme()
 
+			# Draw the scoreboard
+			sb.show_score()
+
 			# Draw aliens to the screen
 			aliens.draw(screen)
 
-			# Draw the scoreboard
-			sb.show_score()
+
 		else:
 			if stats.game_over:
 				lb.draw_leaderboard()
+				sb.draw_text()
+				sb.draw_high_score()
 				play_button.edit_pos(adj_y=300)
 				play_button.edit_msg("Play Again")
 				play_button.draw()
@@ -220,7 +225,7 @@ def ship_hit(settings, stats, screen, sb, lb, ship, aliens, bullets):
 		print("SHIP HIT!!! ---- SHIPS LEFT: " + str(stats.ships_left))
 
 		# Update scoreboard
-		sb.prep_ships()
+		sb.draw_ships()
 
 		# Empty list of alien and bullets
 		aliens.empty()
@@ -251,7 +256,7 @@ def check_bullet_alien_collisions(settings, stats, screen, sb, ship, aliens, bul
 	if collisions:
 		for aliens in collisions.values():
 			stats.score += settings.alien_points * len(aliens)
-			sb.prep_score()
+			sb.draw_score()
 			print("ALIEN HIT --- PLUS " + str(settings.alien_points) + " POINTS!!")
 		check_high_score(stats, sb)
 
@@ -262,7 +267,7 @@ def check_bullet_alien_collisions(settings, stats, screen, sb, ship, aliens, bul
 
 		# Increase level
 		stats.level += 1
-		sb.prep_level()
+		sb.draw_level()
 		print("FLEET DESTROYED -- NEW LEVEL")
 
 		create_fleet(settings, screen, ship, aliens)
@@ -297,7 +302,7 @@ def check_high_score(stats, sb):
 	# Check to see if there's a new high score
 	if stats.score > stats.high_score:
 		stats.high_score = stats.score
-		sb.prep_high_score()
+		sb.draw_high_score()
 		save_score(stats.score)
 
 

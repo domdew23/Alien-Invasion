@@ -18,7 +18,7 @@ class Settings():
 		self.ship_limit = 3
 
 		# Bullet settings
-		self.bullet_width = 30
+		self.bullet_width = 300
 		self.bullet_height = 75
 		self.bullet_color = 60, 60, 60
 		self.bullets_allowed = 3
@@ -41,12 +41,14 @@ class Settings():
 		# File settings
 		self.scores_file = '../data_files/scores.json'
 
+		self.score_rank = 0
+
 		self.initialize_dynamic_settings()
 
 
 	def initialize_dynamic_settings(self):
 		# Initialize settings that change throughout the game
-		self.ship_speed_factor = 1.5
+		self.ship_speed_factor = 1.6
 		self.bullet_speed_factor = 3
 		self.alien_speed_factor = 100 # 1
 

@@ -5,7 +5,7 @@ from pygame.sprite import Group
 from ship import Ship
 
 class LeaderBoard():
-	# Class to report the all time scores
+	# Class to report the all time score
 
 	def __init__(self, settings, screen):
 		# Initialize attributes
@@ -18,10 +18,15 @@ class LeaderBoard():
 		self.font = pygame.font.SysFont(None, 48)
 
 
-	def check_current_score(self, score):
+	def check_current_score(self, score, rank):
 		# Check if the latest score was a high score
 		if self.stats.score == score:
-			self.text_color = colors.yellow
+			if self.settings.score_rank == 0:
+				self.settings.score_rank = rank
+			elif self.settings.score_rank == rank:
+				self.text_color = colors.yellow
+			else:
+				self.text_color = colors.white
 		else:
 			self.text_color = colors.white
 
@@ -70,6 +75,7 @@ class LeaderBoard():
 		name_header_image = self.font.render("Name", True, colors.cyan, self.settings.bg_color)
 		rank_header_image = self.font.render("Rank", True, colors.cyan, self.settings.bg_color)
 
+
 		self.score_header_rect = score_header_image.get_rect()
 		self.name_header_rect = name_header_image.get_rect()
 		self.rank_header_rect = rank_header_image.get_rect()
@@ -88,12 +94,30 @@ class LeaderBoard():
 		self.screen.blit(rank_header_image, self.rank_header_rect)
 
 
+	def draw_your_score(self):
+		your_score_image = self.font.render("Your Score", True, colors.red, self.settings.bg_color)
+		rounded_score = int(round(self.stats.score, -1))
+		score_str = "{:,}".format(rounded_score)
+		score_image = self.font.render(score_str, True, colors.white, self.settings.bg_color)
+		your_score_rect = your_score_image.get_rect()
+		score_rect = score_image.get_rect()
+
+		your_score_rect.right = self.name_header_rect.right
+		your_score_rect.top = self.screen_rect.top + 3
+
+		score_rect.right = your_score_rect.right
+		score_rect.y = your_score_rect.bottom + 15
+
+		self.screen.blit(your_score_image, your_score_rect)
+		self.screen.blit(score_image, score_rect)
+
+
 	def draw_game_over(self):
 		# Draw 'Game Over' at the top of the screen
 		game_over_image = self.font.render("Game Over.", True, colors.red, self.settings.bg_color)
 		game_over_image_rect = game_over_image.get_rect()
-		game_over_image_rect.centerx = self.screen_rect.centerx
-		game_over_image_rect.top = self.screen_rect.top + 20
+		game_over_image_rect.centerx = self.screen_rect.centerx - 300
+		game_over_image_rect.top = self.screen_rect.top + 3
 		self.screen.blit(game_over_image, game_over_image_rect)
 
 
@@ -101,13 +125,14 @@ class LeaderBoard():
 		# Draw the leaderboard
 		self.draw_header()
 		self.draw_game_over()
+		self.draw_your_score()
 		rank = 1
 		move = 20
 		for d in self.stats.top_scores:
 			for name, score in d.items():
 				if rank <= 10:
 					move += 50
-					self.check_current_score(score)
+					self.check_current_score(score, rank)
 					score_image, score_rect = self.prep_scores(score, move)
 					name_image, name_rect = self.prep_names(name, move)
 					rank_image, rank_rect = self.prep_ranks(rank, move)
