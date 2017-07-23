@@ -106,25 +106,6 @@ class LeaderBoard():
 		self.screen.blit(level_header_image, self.level_header_rect)
 
 
-
-	def draw_your_score(self):
-		your_score_image = self.font.render("Your Score", True, colors.red, self.settings.bg_color)
-		rounded_score = int(round(self.stats.score, -1))
-		score_str = "{:,}".format(rounded_score)
-		score_image = self.font.render(score_str, True, colors.white, self.settings.bg_color)
-		your_score_rect = your_score_image.get_rect()
-		score_rect = score_image.get_rect()
-
-		your_score_rect.right = self.name_header_rect.right
-		your_score_rect.top = self.screen_rect.top + 3
-
-		score_rect.right = your_score_rect.right
-		score_rect.y = your_score_rect.bottom + 15
-
-		self.screen.blit(your_score_image, your_score_rect)
-		self.screen.blit(score_image, score_rect)
-
-
 	def draw_game_over(self):
 		# Draw 'Game Over' at the top of the screen
 		game_over_image = self.font.render("Game Over.", True, colors.red, self.settings.bg_color)
@@ -145,7 +126,6 @@ class LeaderBoard():
 		# Draw the leaderboard
 		self.draw_header()
 		self.draw_game_over()
-		self.draw_your_score()
 		rank = 1
 		move = 20
 		for d in self.stats.top_scores:

@@ -1,5 +1,5 @@
 {
-    "users": [
+    "scores": [
         {
             "username": "dom",
             "score": 7407,
@@ -49,6 +49,26 @@
             "username": "dom",
             "score": 0,
             "level": 1
+        },
+        {
+            "username": "dom",
+            "score": 8982,
+            "level": 4
+        },
+        {
+            "username": "dom",
+            "score": 4050,
+            "level": 2
+        },
+        {
+            "username": "dom",
+            "score": 12951,
+            "level": 4
+        },
+        {
+            "username": "dom",
+            "score": 7524,
+            "level": 3
         }
     ],
     "all_time_score": 1696041

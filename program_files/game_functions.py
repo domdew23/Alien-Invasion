@@ -171,6 +171,7 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 				lb.draw_leaderboard()
 				sb.draw_text()
 				sb.draw_high_score()
+				sb.draw_score()
 				play_button.edit_pos(adj_y=350)
 				play_button.edit_msg("Play Again")
 				play_button.draw()
@@ -302,7 +303,7 @@ def save_score(score, user, level, high_score, settings):
 	if os.path.exists(settings.scores_file):
 		with open(settings.scores_file, 'r+') as file:
 			data = json.load(file)
-		data['users'].append({
+		data['scores'].append({
 			'username': user,
 			'score': score,
 			'level': level
@@ -321,10 +322,8 @@ def save(data, settings):
 def all_time_scores(stats, settings):
 		with open(settings.scores_file) as file:
 			data = json.load(file)
-		for user in data['users']:
-			stats.top_scores = sorted(data['users'], key=lambda k: k['score'], reverse=True)
+		stats.top_scores = sorted(data['scores'], key=lambda k: k['score'], reverse=True)
 		get_top_score(stats, settings)
-
 
 def get_top_score(stats, settings):
 	if os.path.exists(settings.scores_file):

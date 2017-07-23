@@ -21,16 +21,23 @@ class Scoreboard():
 
 	def draw_score(self):
 		# Turn the score into a rendered image
+		your_score_image = self.font.render("Your Score", True, colors.red, self.settings.bg_color)
+		your_score_rect = your_score_image.get_rect()
+		your_score_rect.right = self.screen_rect.right - 20
+		your_score_rect.top = self.screen_rect.top + 3
+
 		rounded_score = int(round(self.stats.score, -1))
 		score_str = "{:,}".format(rounded_score)
 		self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 
+
 		# Display score at the top right of the screen
 		self.score_rect = self.score_image.get_rect()
-		self.score_rect.right = self.screen_rect.right - 20
-		self.score_rect.top = 13
-		self.screen.blit(self.score_image, self.score_rect)
+		self.score_rect.right = your_score_rect.right
+		self.score_rect.y = your_score_rect.bottom + 15
 
+		self.screen.blit(your_score_image, your_score_rect)
+		self.screen.blit(self.score_image, self.score_rect)
 
 
 	def draw_high_score(self):
@@ -49,7 +56,7 @@ class Scoreboard():
 	def draw_level(self):
 		# Turn the level into a rendered image
 		level = "Level: " + str(self.stats.level)
-		self.level_image = self.font.render(level, True, self.text_color, self.settings.bg_color)
+		self.level_image = self.font.render(level, True, colors.red, self.settings.bg_color)
 
 		# Position the level below the score
 		self.level_rect = self.level_image.get_rect()
@@ -87,9 +94,3 @@ class Scoreboard():
 
 		# Draw ships
 		self.ships.draw(self.screen)
-
-		#self.prep_score()
-		#self.prep_high_score()
-		#self.prep_level()
-		#self.prep_ships()
-		#self.prep_text()
