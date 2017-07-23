@@ -37,6 +37,7 @@ def display_box(settings, stats, screen, sb, lb, ship, aliens, bullets, play_but
 
 	if len(message) != 0:
 		screen.blit(fontobject.render(message, 1, colors.white), (box_x, box_y))
+	draw_banner(screen)
 	gf.update_screen(settings, stats, screen, sb,lb, ship, aliens, bullets, play_button)
 
 
@@ -91,5 +92,16 @@ def no_username(settings, screen, play_button, message):
 	text_rect = text_image.get_rect()
 	play_button_rect = play_button.get_rect()
 	text_rect.centerx = play_button_rect.centerx
-	text_rect.top = play_button_rect.top - 150
+	text_rect.top = play_button_rect.top - 130
 	screen.blit(text_image, text_rect)
+
+
+def draw_banner(screen):
+	banner_image = pygame.image.load('../images/logos/logo_black.bmp')
+	banner_image = pygame.transform.scale(banner_image, (800, 258))
+	banner_image_rect = banner_image.get_rect()
+	screen_rect = screen.get_rect()
+
+	banner_image_rect.top = screen_rect.top + 25
+	banner_image_rect.centerx = screen_rect.centerx - 25
+	screen.blit(banner_image, banner_image_rect)

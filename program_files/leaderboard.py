@@ -125,7 +125,7 @@ class LeaderBoard():
 	def draw_leaderboard(self):
 		# Draw the leaderboard
 		self.draw_header()
-		self.draw_game_over()
+		#self.draw_game_over()
 		rank = 1
 		move = 20
 		for d in self.stats.top_scores:

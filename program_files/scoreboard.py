@@ -30,7 +30,6 @@ class Scoreboard():
 		score_str = "{:,}".format(rounded_score)
 		self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 
-
 		# Display score at the top right of the screen
 		self.score_rect = self.score_image.get_rect()
 		self.score_rect.right = your_score_rect.right
@@ -65,7 +64,6 @@ class Scoreboard():
 		self.screen.blit(self.level_image, self.level_rect)
 
 
-
 	def draw_ships(self):
 		# Show how many ships are left
 		self.ships = Group()
@@ -82,7 +80,7 @@ class Scoreboard():
 		self.high_score_text_rect.centerx = self.screen_rect.centerx
 		self.high_score_text_rect.top = self.screen_rect.top + 3
 		self.screen.blit(self.high_score_text_image, self.high_score_text_rect)
-
+		
 
 	def show_score(self):
 		# Draw score to screen

@@ -172,6 +172,7 @@ def update_screen(settings, stats, screen, sb, lb, ship, aliens, bullets, play_b
 				sb.draw_text()
 				sb.draw_high_score()
 				sb.draw_score()
+				sb.draw_level()
 				play_button.edit_pos(adj_y=350)
 				play_button.edit_msg("Play Again")
 				play_button.draw()
