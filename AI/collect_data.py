@@ -1,12 +1,11 @@
-import sys
 import cv2
-from key_codes import LEFT, RIGHT, SPACE
 import win32api as wapi 
 import numpy as np
 import time
 import os
-sys.path.append('D:\Coding Projects\Python\gtav_self_driving_car/dependencies')
+
 from functions import countdown, grab_screen
+from key_codes import LEFT, RIGHT, SPACE
 
 l = [1,0,0]
 r = [0,0,1]
@@ -31,6 +30,7 @@ def keys_to_output(keys):
 	else:
 		output[1] = 1
 	return output
+
 
 def key_check():
     keys = []
