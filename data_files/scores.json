@@ -1,180 +1,190 @@
 {
-    "all_time_score": 1696041,
     "scores": [
         {
             "score": 7407,
-            "username": "dom",
-            "level": 4
+            "level": 4,
+            "username": "dom"
         },
         {
             "score": 3150,
-            "username": "dom",
-            "level": 1
+            "level": 1,
+            "username": "dom"
         },
         {
             "score": 110412,
-            "username": "dom",
-            "level": 9
+            "level": 9,
+            "username": "dom"
         },
         {
             "score": 17406,
-            "username": "dom",
-            "level": 5
+            "level": 5,
+            "username": "dom"
         },
         {
             "score": 70461,
-            "username": "dom",
-            "level": 8
+            "level": 8,
+            "username": "dom"
         },
         {
             "score": 12789,
-            "username": "dom",
-            "level": 4
+            "level": 4,
+            "username": "dom"
         },
         {
             "score": 894330,
-            "username": "dom",
-            "level": 15
+            "level": 15,
+            "username": "dom"
         },
         {
             "score": 1696041,
-            "username": "dom",
-            "level": 16
+            "level": 16,
+            "username": "dom"
         },
         {
             "score": 2025,
-            "username": "dom",
-            "level": 2
+            "level": 2,
+            "username": "dom"
         },
         {
             "score": 0,
-            "username": "dom",
-            "level": 1
+            "level": 1,
+            "username": "dom"
         },
         {
             "score": 8982,
-            "username": "dom",
-            "level": 4
+            "level": 4,
+            "username": "dom"
         },
         {
             "score": 4050,
-            "username": "dom",
-            "level": 2
+            "level": 2,
+            "username": "dom"
         },
         {
             "score": 12951,
-            "username": "dom",
-            "level": 4
+            "level": 4,
+            "username": "dom"
         },
         {
             "score": 7524,
-            "username": "dom",
-            "level": 3
+            "level": 3,
+            "username": "dom"
         },
         {
             "score": 4383,
-            "username": "dom",
-            "level": 3
+            "level": 3,
+            "username": "dom"
         },
         {
             "score": 0,
-            "username": "dom",
-            "level": 1
+            "level": 1,
+            "username": "dom"
         },
         {
             "score": 0,
-            "username": "dom",
-            "level": 1
+            "level": 1,
+            "username": "dom"
         },
         {
             "score": 6516,
-            "username": "dom",
-            "level": 3
+            "level": 3,
+            "username": "dom"
         },
         {
             "score": 11502,
-            "username": "dom",
-            "level": 4
+            "level": 4,
+            "username": "dom"
         },
         {
             "score": 7083,
-            "username": "dom",
-            "level": 3
+            "level": 3,
+            "username": "dom"
         },
         {
             "score": 0,
-            "username": "dom",
-            "level": 1
+            "level": 1,
+            "username": "dom"
         },
         {
             "score": 25137,
-            "username": "dom",
-            "level": 6
+            "level": 6,
+            "username": "dom"
         },
         {
             "score": 17685,
-            "username": "dom",
-            "level": 5
+            "level": 5,
+            "username": "dom"
         },
         {
             "score": 11673,
-            "username": "dom",
-            "level": 4
+            "level": 4,
+            "username": "dom"
         },
         {
             "score": 226821,
-            "username": "dom",
-            "level": 10
+            "level": 10,
+            "username": "dom"
         },
         {
             "score": 79631,
-            "username": "dom",
-            "level": 8
+            "level": 8,
+            "username": "dom"
         },
         {
             "score": 804006,
-            "username": "dom",
-            "level": 13
+            "level": 13,
+            "username": "dom"
         },
         {
             "score": 745929,
-            "username": "dom",
-            "level": 13
+            "level": 13,
+            "username": "dom"
         },
         {
             "score": 907248,
-            "username": "dom",
-            "level": 14
+            "level": 14,
+            "username": "dom"
         },
         {
             "score": 35316,
-            "username": "dom",
-            "level": 7
+            "level": 7,
+            "username": "dom"
         },
         {
             "score": 804006,
-            "username": "dom",
-            "level": 13
+            "level": 13,
+            "username": "dom"
         },
         {
             "score": 595359,
-            "username": "dom",
-            "level": 12
+            "level": 12,
+            "username": "dom"
         },
         {
             "score": 1094370,
-            "username": "dom",
-            "level": 14
+            "level": 14,
+            "username": "dom"
         },
         {
             "score": 806157,
-            "username": "dom",
-            "level": 13
+            "level": 13,
+            "username": "dom"
         },
         {
             "score": 508689,
-            "username": "dom",
-            "level": 12
+            "level": 12,
+            "username": "dom"
+        },
+        {
+            "score": 417009,
+            "level": 12,
+            "username": "tzaitz"
+        },
+        {
+            "username": "vuncee",
+            "level": 12,
+            "score": 493067
         }
-    ]
+    ],
+    "all_time_score": 1696041
 }
