@@ -1,11 +1,28 @@
 import numpy as np 
 from sklearn.model_selection import train_test_split
 import pandas as pd
+import cv2
+import time
 
-FINAL_FILE_NAME = 'data/final_training_data.npy'
+FINAL_FILE_NAME = 'data/training_data.npy'
 WIDTH, HEIGHT = 320, 180
 
 train_data = np.load(FINAL_FILE_NAME)
+
+for data in train_data:
+	img = data[0]
+	choice = data[1]
+
+	cv2.imshow('test',img)
+
+	if (choice[1] == 1):
+		print("SHOT")
+		time.sleep(1)
+
+	if cv2.waitKey(25) & 0xFF == ord('q'):
+		cv2.destroyAllWindows()
+		break
+
 df = pd.DataFrame(train_data)
 X = np.array(train_data[0])
 y = np.array(train_data[0])

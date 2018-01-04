@@ -25,10 +25,15 @@ def keys_to_output(keys):
 
 	if left_key in keys:
 		output[0] = 1
+		print("left")
 	elif right_key in keys:
 		output[2] = 1
-	else:
+		print("right")
+	elif space_key in keys:
 		output[1] = 1
+		print("space")
+	else:
+		pass
 	return output
 
 
@@ -77,7 +82,7 @@ def main():
 		if not PAUSED:
 			start_time = time.time()
 			screen = get_screen()
-			# show_screen(screen)
+			#show_screen(screen)
 
 			keys = key_check()
 			output = keys_to_output(keys)
@@ -99,6 +104,5 @@ def main():
 			else:
 				PAUSED = False
 				print("Unpausing training")
-
 
 main()
